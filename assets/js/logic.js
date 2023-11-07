@@ -27,11 +27,12 @@ function setTimer() {
     timer.textContent = seconds;
     seconds--;
 
-    if (seconds === 0) {
+    if (seconds <= 0) {
       clearInterval(timeInterval);
       timer.textContent = seconds;
       questionTitle.innerHTML = "";
       choicesContainer.innerHTML = "";
+      endScreen.style.display = "block";
     }
   }, 1000);
 }
@@ -71,9 +72,17 @@ function answerClick(event) {
   }
 
   currentQuestionIndex++;
+
   updateQuestions();
 }
+
+function endQuiz() {
+  console.log(seconds, currentQuestionIndex);
+  if (seconds <= 0 || currentQuestionIndex === 4) {
+  }
+}
 updateQuestions();
+endQuiz();
 
 //when the game ends, show the enter the intials div
 // get the users score and initals and make an object out of it
