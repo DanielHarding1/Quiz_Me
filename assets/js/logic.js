@@ -37,6 +37,7 @@ function setTimer() {
 function updateQuestions() {
   if (currentQuestionIndex < newQuestions.length) {
     var currentQuestion = newQuestions[currentQuestionIndex];
+    choicesContainer.innerHTML = "";
 
     questionTitle.textContent = currentQuestion.question;
     questionsDiv.appendChild(questionTitle);
@@ -44,11 +45,12 @@ function updateQuestions() {
     currentQuestion.answers.forEach((answers) => {
       var questionbtn = document.createElement("button");
       questionbtn.textContent = answers;
+      choicesContainer.appendChild(questionbtn);
       if (answers === currentQuestion.correctAnswer) {
         questionbtn.className = "correct";
       }
-      questionbutton.addEventListener("click", answerClick);
-      choicesContainer.appendChild(button);
+      questionbtn.addEventListener("click", answerClick);
+      choicesContainer.appendChild(questionbtn);
     });
   } else {
     endScreen.style.display = "show";
@@ -63,3 +65,4 @@ function answerClick(event) {
   currentQuestionIndex++;
   updateQuestions();
 }
+updateQuestions();

@@ -1,4 +1,4 @@
-var choicesContainer = document.querySelectorAll("choices");
+var choicesContainer = document.getElementById("choices");
 
 var newQuestions = [
   {
@@ -7,7 +7,7 @@ var newQuestions = [
     correctAnswer: "Netscape",
   },
   {
-    question: "Javascript is a _________ language",
+    question: "Javascript is a _________ Language",
     answers: [
       "Object-Oriented",
       "Object-Based",
