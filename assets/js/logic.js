@@ -30,6 +30,8 @@ function setTimer() {
     if (seconds === 0) {
       clearInterval(timeInterval);
       timer.textContent = seconds;
+      questionTitle.innerHTML = "";
+      choicesContainer.innerHTML = "";
     }
   }, 1000);
 }
@@ -44,25 +46,35 @@ function updateQuestions() {
 
     currentQuestion.answers.forEach((answers) => {
       var questionbtn = document.createElement("button");
+
+      if (answers === currentQuestion.correctAnswer) {
+        questionbtn.setAttribute("data-iscorrect", "true");
+      } else if (answers != currentQuestion.correctAnswer) {
+        questionbtn.setAttribute("data-iscorrect", "false");
+      }
+
       questionbtn.textContent = answers;
       choicesContainer.appendChild(questionbtn);
-      if (answers === currentQuestion.correctAnswer) {
-        questionbtn.className = "correct";
-      }
+      console.log(currentQuestion);
+
       questionbtn.addEventListener("click", answerClick);
       choicesContainer.appendChild(questionbtn);
     });
-  } else {
-    endScreen.style.display = "show";
   }
 }
 
 function answerClick(event) {
-  if (event.target.classList.contains("correct")) {
+  if (event.target.dataset.iscorrect === "true") {
     score++;
+  } else {
+    seconds = seconds - 10;
   }
 
   currentQuestionIndex++;
   updateQuestions();
 }
 updateQuestions();
+
+//when the game ends, show the enter the intials div
+// get the users score and initals and make an object out of it
+//read the high scores from local storage and add the new object to it
