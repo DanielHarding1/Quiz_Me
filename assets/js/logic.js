@@ -3,16 +3,14 @@ const questionsDiv = document.getElementById("questions");
 var questionTitle = document.getElementById("question-title");
 var timer = document.getElementById("time");
 var endScreen = document.getElementById("end-screen");
+var finalscore = document.getElementById("final-score");
+var submitBtn = document.getElementById("submit");
 var seconds = 60;
 var currentQuestionIndex = 0;
 var score = 0;
 
-// Get a reference to the "Start Quiz" button
 const startButton = document.getElementById("start");
 
-// Add an event listener to the "Start Quiz" button
-// startButton.addEventListener;
-// "click", setTimer();
 startButton.addEventListener("click", startQuiz);
 
 startButton.addEventListener("click", setTimer);
@@ -61,6 +59,8 @@ function updateQuestions() {
       questionbtn.addEventListener("click", answerClick);
       choicesContainer.appendChild(questionbtn);
     });
+  } else {
+    endQuiz();
   }
 }
 
@@ -77,13 +77,24 @@ function answerClick(event) {
 }
 
 function endQuiz() {
-  console.log(seconds, currentQuestionIndex);
-  if (seconds <= 0 || currentQuestionIndex === 4) {
-  }
+  questionTitle.innerHTML = "";
+  choicesContainer.innerHTML = "";
+  endScreen.style.display = "block";
+  seconds = 1;
+  finalscore.textContent = score;
 }
+
 updateQuestions();
-endQuiz();
 
 //when the game ends, show the enter the intials div
 // get the users score and initals and make an object out of it
 //read the high scores from local storage and add the new object to it
+
+var userdata = "";
+var currentUser = [];
+
+submitBtn.addEventListener("click", function () {
+  var userInitials = document.getElementById("user-initials").value;
+  var currentUser = [userInitials + " , " + score];
+  localStorage.setItem("User", currentUser);
+});
